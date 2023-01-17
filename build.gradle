@@ -13,7 +13,7 @@ repositories {
 }
 
 ext {
-    junitVersion = '5.9.1'
+    junitVersion = '5.9.2'
 }
 
 sourceCompatibility = '17'
@@ -34,7 +34,7 @@ javafx {
 }
 
 dependencies {
-
+    implementation group: 'com.jfoenix', name: 'jfoenix', version: '9.0.10'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
