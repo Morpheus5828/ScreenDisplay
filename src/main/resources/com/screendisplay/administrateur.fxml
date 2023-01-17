@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="com.screendisplay.Controller.Controller">
+   <top>
+      <Pane prefHeight="70.0" prefWidth="600.0" style="-fx-background-color: blue;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="28.0" layoutY="20.0" prefHeight="36.0" prefWidth="144.0" text="ScreenDisplay">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+   <left>
+      <Pane prefHeight="325.0" prefWidth="161.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutY="16.0" prefHeight="309.0" prefWidth="161.0">
+               <children>
+                  <Button fx:id="screen" mnemonicParsing="false" onAction="#displayScreens" prefHeight="37.0" prefWidth="161.0" text="Ecran" textAlignment="CENTER" />
+                  <Button fx:id="playlist" mnemonicParsing="false" onAction="#displayPlaylists" prefHeight="37.0" prefWidth="161.0" text="Playlist" textAlignment="CENTER" />
+                  <Button fx:id="document" mnemonicParsing="false" onAction="#displayDocuments" prefHeight="37.0" prefWidth="161.0" text="Document" textAlignment="CENTER" />
+                  <Button fx:id="user" mnemonicParsing="false" onAction="#displayUsers" prefHeight="37.0" prefWidth="161.0" text="Utilisateur" textAlignment="CENTER" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="458.0" prefWidth="651.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane fx:id="contentArea" layoutX="7.0" layoutY="7.0" prefHeight="319.0" prefWidth="432.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
