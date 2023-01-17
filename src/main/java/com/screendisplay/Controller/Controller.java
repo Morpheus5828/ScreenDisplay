@@ -2,12 +2,18 @@ package com.screendisplay.Controller;
 
 import com.screendisplay.HelloApplication;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +25,10 @@ public class Controller  implements Initializable{
     @FXML private Button document;
     @FXML private Button user;
     @FXML private StackPane contentArea;
+    // In playlist fxml page
+    @FXML private Button createPlaylist;
+    @FXML private VBox playLists;
+    private Stage playlistConfigStage = new Stage();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -67,6 +77,48 @@ public class Controller  implements Initializable{
         contentArea.getChildren().setAll(fxml);
     }
 
+    public void addPlaylist(ActionEvent actionEvent) throws IOException {
+        openPlayListConfiguration();
+    }
+
+    public void createNewPlaylist(ActionEvent actionEvent) throws IOException {
+        playlistConfigStage.close();
+    }
+
+    private void openPlayListConfiguration() {
+        Pane pane = new Pane();
+
+        TextField playlistName = new TextField();
+        playlistName.setPromptText("NAME");
+        playlistName.setLayoutX(76);
+        playlistName.setLayoutY(25);
+        playlistName.setPrefHeight(25);
+        playlistName.setPrefWidth(150);
+
+        Button ok = new Button("CREER");
+        ok.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //on récupère le nom de la playlist
+                playlistConfigStage.close();
+            }
+        });
+
+        ok.setLayoutX(105);
+        ok.setLayoutY(228);
+
+        pane.getChildren().add(playlistName);
+        pane.getChildren().add(ok);
+        pane.setPrefWidth(282.0);
+        pane.setPrefHeight(322.0);
+
+        Scene scene = new Scene(pane,320, 240);
+        playlistConfigStage.setTitle("Playlist configuration");
+        playlistConfigStage.setScene(scene);
+        playlistConfigStage.setMinHeight(200);
+        playlistConfigStage.setMinWidth(200);
+        playlistConfigStage.show();
+    }
 
 
 }
