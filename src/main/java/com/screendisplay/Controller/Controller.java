@@ -18,6 +18,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller  implements Initializable{
@@ -30,6 +33,7 @@ public class Controller  implements Initializable{
     @FXML private Button createPlaylist;
     @FXML private VBox playLists;
     private Stage playlistConfigStage = new Stage();
+    private List<Button> playlistButtonRedirection = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,12 +82,10 @@ public class Controller  implements Initializable{
         contentArea.getChildren().setAll(fxml);
     }
 
+/* Playlist list configuration */
+
     public void addPlaylist(ActionEvent actionEvent) throws IOException {
         openPlayListConfiguration();
-    }
-
-    public void createNewPlaylist(ActionEvent actionEvent) throws IOException {
-        playlistConfigStage.close();
     }
 
     private void openPlayListConfiguration() {
@@ -106,7 +108,9 @@ public class Controller  implements Initializable{
                     alert.setContentText("La nouvelle playlist n'as pas de nom attribué");
                     alert.show();
                 } else{
-                    //on récupère le nom de la playlist
+                    Button playlistRedirection = new Button();
+                    playlistButtonRedirection.add(playlistRedirection);
+                    // TODO pensez à save la playlist dans une BDR
                     playLists.getChildren().add(new Button(getTextFieldWithoutSpace(playlistName.getText())));
                     playlistConfigStage.close();
                 }
@@ -142,6 +146,8 @@ public class Controller  implements Initializable{
         for(char s : word.toCharArray()) if(s != ' ') result += s;
         return result;
     }
+
+/* Playlist configuration */
 
 
 }
