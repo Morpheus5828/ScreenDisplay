@@ -30,7 +30,6 @@ public class Controller  implements Initializable{
     @FXML private Button user;
     @FXML private StackPane contentArea;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         /*
@@ -58,7 +57,7 @@ public class Controller  implements Initializable{
     }
 
     public void displayPlaylists(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("playlist.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("playlistConfig.fxml"));
         Parent fxml = fxmlLoader.load();
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
@@ -77,7 +76,6 @@ public class Controller  implements Initializable{
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
-
 
 
 }

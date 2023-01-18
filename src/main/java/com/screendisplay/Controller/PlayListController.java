@@ -12,14 +12,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class PlayListController {
     @FXML private Button createPlaylist;
     @FXML private VBox playLists;
     private Stage playlistConfigStage = new Stage();
-    private List<Button> playlistButtonRedirection = new ArrayList<>();
+    private HashMap<Button, SlideController> playlistButtonRedirection = new HashMap<>();
 
     public void addPlaylist(ActionEvent actionEvent) throws IOException {
         openPlayListConfiguration();
@@ -42,12 +41,16 @@ public class PlayListController {
                 if(!hasCharacter(playlistName.getText())) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Erreur");
-                    alert.setContentText("La nouvelle playlist n'as pas de nom attribué");
+                    alert.setContentText("La nouvelle playlist n'a pas de nom attribué");
                     alert.show();
-                } else{
-                    Button playlistRedirection = new Button();
-                    playlistButtonRedirection.add(playlistRedirection);
-                    // TODO pensez à save la playlist dans une BDR
+                } else {
+                    Button playlistRedirection = new Button(playlistName.getText());
+
+                    try {
+                        playlistButtonRedirection.put(playlistRedirection, new SlideController());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     playLists.getChildren().add(new Button(getTextFieldWithoutSpace(playlistName.getText())));
                     playlistConfigStage.close();
                 }
@@ -83,4 +86,8 @@ public class PlayListController {
         for(char s : word.toCharArray()) if(s != ' ') result += s;
         return result;
     }
+
+
+
+
 }
