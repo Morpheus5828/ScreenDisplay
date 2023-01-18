@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -99,8 +100,16 @@ public class Controller  implements Initializable{
         ok.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //on récupère le nom de la playlist
-                playlistConfigStage.close();
+                if(!hasCharacter(playlistName.getText())) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Erreur");
+                    alert.setContentText("La nouvelle playlist n'as pas de nom attribué");
+                    alert.show();
+                } else{
+                    //on récupère le nom de la playlist
+                    playLists.getChildren().add(new Button(getTextFieldWithoutSpace(playlistName.getText())));
+                    playlistConfigStage.close();
+                }
             }
         });
 
@@ -118,6 +127,20 @@ public class Controller  implements Initializable{
         playlistConfigStage.setMinHeight(200);
         playlistConfigStage.setMinWidth(200);
         playlistConfigStage.show();
+    }
+
+    private boolean hasCharacter(String word) {
+        if(word.length() == 0) return false;
+        for(char s : word.toCharArray()) {
+            if(s != ' ') return true;
+        }
+        return false;
+    }
+
+    private String getTextFieldWithoutSpace(String word) {
+        String result = "";
+        for(char s : word.toCharArray()) if(s != ' ') result += s;
+        return result;
     }
 
 
