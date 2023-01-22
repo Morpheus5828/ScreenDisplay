@@ -2,25 +2,15 @@ package com.screendisplay.Controller;
 
 import com.screendisplay.HelloApplication;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller  implements Initializable{
@@ -76,6 +66,5 @@ public class Controller  implements Initializable{
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }
-
 
 }

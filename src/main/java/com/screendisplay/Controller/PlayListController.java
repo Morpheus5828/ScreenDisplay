@@ -1,24 +1,31 @@
 package com.screendisplay.Controller;
 
+import com.screendisplay.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
+
 
 public class PlayListController {
     @FXML private Button createPlaylist;
-    @FXML private VBox playLists;
-    private Stage playlistConfigStage = new Stage();
-    private HashMap<Button, SlideController> playlistButtonRedirection = new HashMap<>();
+    @FXML private Pane playlistPane;
+    @FXML private StackPane stackPane;
+    private Stage playlistConfigStage;
+
+    private Map<Button, SlideManagement> playlistButtonRedirection = new HashMap<>();
 
     public void addPlaylist(ActionEvent actionEvent) throws IOException {
         openPlayListConfiguration();
@@ -38,22 +45,24 @@ public class PlayListController {
         ok.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(!hasCharacter(playlistName.getText())) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Erreur");
-                    alert.setContentText("La nouvelle playlist n'a pas de nom attribué");
-                    alert.show();
-                } else {
-                    Button playlistRedirection = new Button(playlistName.getText());
-
-                    try {
-                        playlistButtonRedirection.put(playlistRedirection, new SlideController());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+                try {
+                    if(!hasCharacter(playlistName.getText())) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Erreur");
+                        alert.setContentText("La nouvelle playlist n'a pas de nom attribué");
+                        alert.show();
+                    } else {
+                        Button button = new Button(playlistName.getText());
+                        SlideManagement slide = new SlideManagement();
+                        playlistButtonRedirection.put(button,slide);
+                        stackPane.getChildren().add(button);
+                        addActionToButton(button,slide);
+                        playlistConfigStage.close();
                     }
-                    playLists.getChildren().add(new Button(getTextFieldWithoutSpace(playlistName.getText())));
-                    playlistConfigStage.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
+
             }
         });
 
@@ -64,13 +73,31 @@ public class PlayListController {
         pane.getChildren().add(ok);
         pane.setPrefWidth(282.0);
         pane.setPrefHeight(322.0);
-
+        playlistConfigStage = new Stage();
         Scene scene = new Scene(pane,320, 240);
         playlistConfigStage.setTitle("Playlist configuration");
         playlistConfigStage.setScene(scene);
         playlistConfigStage.setMinHeight(200);
         playlistConfigStage.setMinWidth(200);
         playlistConfigStage.show();
+    }
+
+    private void redirection(Button button) throws IOException {
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("slide.fxml"));
+                Parent fxml = null;
+                try {
+                    fxml = fxmlLoader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stackPane.getChildren().removeAll();
+                stackPane.getChildren().setAll(fxml);
+            }
+        });
+
     }
 
     private boolean hasCharacter(String word) {
@@ -86,6 +113,27 @@ public class PlayListController {
         for(char s : word.toCharArray()) if(s != ' ') result += s;
         return result;
     }
+
+    private void addActionToButton(Button button, SlideManagement file) {
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    //deleteAllChildren();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
+
+    private void deleteAllChildren() {
+        stackPane.getChildren().removeAll();
+    }
+
+    //TODO add set on action sur les boutons qui renvoie vers les playlists
 
 
 

@@ -5,12 +5,12 @@
 <?import javafx.scene.shape.Line?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="857.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.screendisplay.Controller.SlideController">
    <top>
       <Pane prefHeight="99.0" prefWidth="600.0" style="-fx-background-color: blue;" BorderPane.alignment="CENTER" />
    </top>
    <center>
-      <Pane prefHeight="443.0" prefWidth="708.0" BorderPane.alignment="CENTER">
+      <Pane fx:id="pane" prefHeight="443.0" prefWidth="708.0" BorderPane.alignment="CENTER">
          <children>
             <Pane layoutX="29.0" layoutY="21.0" prefHeight="421.0" prefWidth="635.0" style="-fx-border-color: grey; -fx-background-color: beige;">
                <children>
