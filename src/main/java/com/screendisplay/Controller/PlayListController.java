@@ -1,10 +1,13 @@
 package com.screendisplay.Controller;
 
 import com.screendisplay.HelloApplication;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -52,11 +55,9 @@ public class PlayListController {
                         alert.setContentText("La nouvelle playlist n'a pas de nom attribué");
                         alert.show();
                     } else {
-                        Button button = new Button(playlistName.getText());
-                        SlideManagement slide = new SlideManagement();
-                        playlistButtonRedirection.put(button,slide);
+                        Button button = createButtonPlaylist(playlistName.getText());
                         stackPane.getChildren().add(button);
-                        addActionToButton(button,slide);
+
                         playlistConfigStage.close();
                     }
                 } catch (IOException e) {
@@ -82,19 +83,36 @@ public class PlayListController {
         playlistConfigStage.show();
     }
 
-    private void redirection(Button button) throws IOException {
+    private void addElementToStackPane(Node child) {
+        this.stackPane.getChildren().add(child);
+    }
+
+    private Button createButtonPlaylist(String name) throws IOException {
+        SlideManagement slide = new SlideManagement();
+        Button button = new Button(name);
+        // add action event to this button
+        redirection(button, slide);
+
+
+        playlistButtonRedirection.put(button,slide);
+        return button;
+
+    }
+
+    private void redirection(Button button, SlideManagement slideManagement) throws IOException {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("slide.fxml"));
-                Parent fxml = null;
                 try {
-                    fxml = fxmlLoader.load();
-                } catch (IOException e) {
+                    System.out.println(slideManagement.getUrl(0));
+                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("slide.fxml"));
+                    Parent fxml = fxmlLoader.load();
+                    stackPane.getChildren().clear();
+                   // stackPane.getChildren().add(fxml);
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                stackPane.getChildren().removeAll();
-                stackPane.getChildren().setAll(fxml);
+
             }
         });
 
