@@ -1,8 +1,7 @@
 package com.screendisplay.Controller;
 
+import com.screendisplay.Controller.Slide.SlideManagement;
 import com.screendisplay.HelloApplication;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -108,9 +107,10 @@ public class PlayListController {
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("slide.fxml"));
                     Parent fxml = fxmlLoader.load();
                     stackPane.getChildren().clear();
-                   // stackPane.getChildren().add(fxml);
+                    stackPane.getChildren().removeAll();
+                    stackPane.getChildren().setAll(fxml);
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
 
             }

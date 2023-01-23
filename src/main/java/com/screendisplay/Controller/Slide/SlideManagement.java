@@ -1,8 +1,6 @@
-package com.screendisplay.Controller;
+package com.screendisplay.Controller.Slide;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 

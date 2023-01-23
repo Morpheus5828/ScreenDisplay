@@ -1,4 +1,4 @@
-package com.screendisplay.Controller;
+package com.screendisplay.Controller.Slide;
 
 import com.screendisplay.HelloApplication;
 import javafx.fxml.FXML;
@@ -22,8 +22,8 @@ public class SlideController {
     public SlideController() throws IOException {
         this.slides = new ArrayList<>();
         this.counter = 0;
-        createFirstSlide();
-        displaySlides(this.slides.get(0)); // display first slide
+       // createFirstSlide();
+       // displaySlides(this.slides.get(0)); // display first slide
     }
 
     public void displaySlides(File file) throws IOException {
@@ -55,7 +55,7 @@ public class SlideController {
                 "<?import javafx.scene.shape.Line?>\n" +
                 "\n" +
                 "\n" +
-                "<BorderPane maxHeight=\"-Infinity\" maxWidth=\"-Infinity\" minHeight=\"-Infinity\" minWidth=\"-Infinity\" prefHeight=\"575.0\" prefWidth=\"857.0\" xmlns=\"http://javafx.com/javafx/19\" fx:controller=\"com.screendisplay.Controller.SlideController\" xmlns:fx=\"http://javafx.com/fxml/1\">\n" +
+                "<BorderPane maxHeight=\"-Infinity\" maxWidth=\"-Infinity\" minHeight=\"-Infinity\" minWidth=\"-Infinity\" prefHeight=\"575.0\" prefWidth=\"857.0\" xmlns=\"http://javafx.com/javafx/19\" fx:controller=\"com.screendisplay.Controller.Slide.SlideController\" xmlns:fx=\"http://javafx.com/fxml/1\">\n" +
                 "   <top>\n" +
                 "      <Pane prefHeight=\"99.0\" prefWidth=\"600.0\" style=\"-fx-background-color: blue;\" BorderPane.alignment=\"CENTER\" />\n" +
                 "   </top>\n" +
