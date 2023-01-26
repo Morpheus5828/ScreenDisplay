@@ -1,11 +1,19 @@
 package com.screendisplay.Controller.Slide;
 
 import com.screendisplay.HelloApplication;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,12 +24,14 @@ import java.util.List;
 public class SlideController {
     @FXML private BorderPane borderPane;
     @FXML private Pane pane;
-    private List<File> slides;
-    private int counter;
+    @FXML private Pane slideDisplay;
+    private List<Text> texts;
+    private int slideDisplayNumber;
+
 
     public SlideController() throws IOException {
-        this.slides = new ArrayList<>();
-        this.counter = 0;
+        this.slideDisplayNumber = 0;
+        this.texts = new ArrayList<>();
        // createFirstSlide();
        // displaySlides(this.slides.get(0)); // display first slide
     }
@@ -34,17 +44,15 @@ public class SlideController {
     }
 
     public void createFirstSlide() throws IOException {
-        File file = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists\\slide" + counter +".fxml");
+        File file = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists\\slide" + slideDisplayNumber +".fxml");
         Files.write(file.toPath(), initEmptySlide().getBytes());
-        this.slides.add(file);
-        this.counter++;
+        this.slideDisplayNumber++;
     }
 
     public void addSlide() throws IOException {
-        File file = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists\\slide" + counter +".fxml");
+        File file = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists\\slide" + slideDisplayNumber +".fxml");
         Files.write(file.toPath(), initEmptySlide().getBytes());
-        this.slides.add(file);
-        this.counter++;
+        this.slideDisplayNumber++;
     }
 
     private String initEmptySlide() {
@@ -87,5 +95,37 @@ public class SlideController {
 
 
                 ;
+    }
+
+    public void addTextButton(MouseEvent mouseEvent) throws IOException {
+        TextField text = new TextField("Appuyer pour modifier");
+        text.setLayoutX(slideDisplay.getPrefHeight()/2);
+        text.setLayoutY(slideDisplay.getPrefWidth()/2);
+        text.setStyle("-fx-border-color: black");
+        text.setOpacity(0.123);
+        slideDisplay.getChildren().add(text);
+
+        text.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                    if(mouseEvent.getClickCount() == 1 || mouseEvent.getClickCount() == 2){
+                        text.setEditable(true);
+                    }
+                }
+                text.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent event) {
+                        if(event.getCode() == KeyCode.ENTER)
+                            text.setEditable(false);
+
+                    }
+                });
+            }
+        });
+
+
+
+
     }
 }

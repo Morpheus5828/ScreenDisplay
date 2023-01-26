@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="264.0" prefWidth="394.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="com.screendisplay.Controller.Slide.SlideController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="264.0" prefWidth="394.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.screendisplay.Controller.Slide.SlideController">
    <center>
       <Pane fx:id="pane" prefHeight="259.0" prefWidth="290.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane layoutX="14.0" layoutY="26.0" prefHeight="210.0" prefWidth="255.0" style="-fx-border-color: grey; -fx-background-color: beige;" />
+            <Pane fx:id="slideDisplay" layoutX="14.0" layoutY="26.0" prefHeight="210.0" prefWidth="255.0" style="-fx-border-color: grey; -fx-background-color: beige;" />
          </children>
       </Pane>
    </center>
    <left>
-      <Pane prefHeight="201.0" prefWidth="110.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER" />
+      <Pane prefHeight="201.0" prefWidth="110.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="29.0" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#addTextButton" text="TEXTE" />
+         </children></Pane>
    </left>
 </BorderPane>
