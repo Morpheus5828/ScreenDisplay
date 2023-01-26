@@ -133,6 +133,7 @@ public class PlayListController {
     }
 
     private void addActionToButton(Button button, SlideManagement file) {
+        //TODO add set on action sur les boutons qui renvoie vers les playlists
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -151,7 +152,7 @@ public class PlayListController {
         stackPane.getChildren().removeAll();
     }
 
-    //TODO add set on action sur les boutons qui renvoie vers les playlists
+
 
 
 

@@ -103,7 +103,7 @@ public class SlideController {
         text.setLayoutY(slideDisplay.getLayoutY()/2);
         text.setStyle("-fx-border-color: black");
         text.setStyle("-fx-background-color: white");
-        text.setPrefWidth(100);
+        text.setPrefWidth(140);
         slideDisplay.getChildren().add(text);
 
         text.setOnMouseClicked(new EventHandler<MouseEvent>() {
