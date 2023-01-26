@@ -82,17 +82,11 @@ public class PlayListController {
         playlistConfigStage.show();
     }
 
-    private void addElementToStackPane(Node child) {
-        this.stackPane.getChildren().add(child);
-    }
-
     private Button createButtonPlaylist(String name) throws IOException {
         SlideManagement slide = new SlideManagement();
         Button button = new Button(name);
         // add action event to this button
         redirection(button, slide);
-
-
         playlistButtonRedirection.put(button,slide);
         return button;
 
@@ -103,6 +97,8 @@ public class PlayListController {
             @Override
             public void handle(ActionEvent event) {
                 try {
+
+
                     System.out.println(slideManagement.getUrl(0));
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("slide.fxml"));
                     Parent fxml = fxmlLoader.load();
@@ -116,6 +112,13 @@ public class PlayListController {
             }
         });
 
+    }
+
+    public void displayButtonPlaylist() {
+        for(Button button : this.playlistButtonRedirection.keySet()) {
+            stackPane.getChildren().clear();
+            stackPane.getChildren().add(button);
+        }
     }
 
     private boolean hasCharacter(String word) {
@@ -147,12 +150,6 @@ public class PlayListController {
             }
         });
     }
-
-    private void deleteAllChildren() {
-        stackPane.getChildren().removeAll();
-    }
-
-
 
 
 
