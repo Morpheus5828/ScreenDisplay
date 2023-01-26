@@ -99,25 +99,32 @@ public class SlideController {
 
     public void addTextButton(MouseEvent mouseEvent) throws IOException {
         TextField text = new TextField("Appuyer pour modifier");
-        text.setLayoutX(slideDisplay.getPrefHeight()/2);
-        text.setLayoutY(slideDisplay.getPrefWidth()/2);
+        text.setLayoutX(slideDisplay.getLayoutX()/2);
+        text.setLayoutY(slideDisplay.getLayoutY()/2);
         text.setStyle("-fx-border-color: black");
-        text.setOpacity(0.123);
+        text.setStyle("-fx-background-color: white");
+        text.setPrefWidth(100);
         slideDisplay.getChildren().add(text);
 
         text.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
             @Override
             public void handle(MouseEvent event) {
                 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                     if(mouseEvent.getClickCount() == 1 || mouseEvent.getClickCount() == 2){
                         text.setEditable(true);
+                        text.setStyle("-fx-background-color: white");
                     }
                 }
                 text.setOnKeyPressed(new EventHandler<KeyEvent>() {
                     @Override
                     public void handle(KeyEvent event) {
-                        if(event.getCode() == KeyCode.ENTER)
+                        if(event.getCode() == KeyCode.ENTER) {
                             text.setEditable(false);
+                            text.setStyle("-fx-background-color: beige");
+                        }
+
+
 
                     }
                 });
