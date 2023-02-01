@@ -1,6 +1,7 @@
 module com.screendisplay {
     requires javafx.controls;
     requires javafx.fxml;
+    requires org.json;
 
     opens com.screendisplay to javafx.fxml;
     exports com.screendisplay;

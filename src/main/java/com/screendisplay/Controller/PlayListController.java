@@ -86,40 +86,11 @@ public class PlayListController {
         SlideManagement slide = new SlideManagement();
         Button button = new Button(name);
         // add action event to this button
-        redirection(button, slide);
         playlistButtonRedirection.put(button,slide);
         return button;
 
     }
 
-    private void redirection(Button button, SlideManagement slideManagement) throws IOException {
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-
-
-                    System.out.println(slideManagement.getUrl(0));
-                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("slide.fxml"));
-                    Parent fxml = fxmlLoader.load();
-                    stackPane.getChildren().clear();
-                    stackPane.getChildren().removeAll();
-                    stackPane.getChildren().setAll(fxml);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
-    }
-
-    public void displayButtonPlaylist() {
-        for(Button button : this.playlistButtonRedirection.keySet()) {
-            stackPane.getChildren().clear();
-            stackPane.getChildren().add(button);
-        }
-    }
 
     private boolean hasCharacter(String word) {
         if(word.length() == 0) return false;
@@ -127,28 +98,6 @@ public class PlayListController {
             if(s != ' ') return true;
         }
         return false;
-    }
-
-    private String getTextFieldWithoutSpace(String word) {
-        String result = "";
-        for(char s : word.toCharArray()) if(s != ' ') result += s;
-        return result;
-    }
-
-    private void addActionToButton(Button button, SlideManagement file) {
-        //TODO add set on action sur les boutons qui renvoie vers les playlists
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    //deleteAllChildren();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
     }
 
 

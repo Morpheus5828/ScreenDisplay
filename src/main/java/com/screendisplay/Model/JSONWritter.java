@@ -1,42 +1,33 @@
-package com.screendisplay.Controller.Slide;
+package com.screendisplay.Model;
 
-import com.screendisplay.HelloApplication;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
 
-public class SlideController {
-    @FXML private BorderPane borderPane;
-    @FXML private Pane pane;
-    @FXML private Pane slideDisplay;
-    private List<Text> texts;
-    private int slideDisplayNumber;
+public class JSONWritter {
+    private final String path = "C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists";
+    private JSONObject jsonObject;
+    private String playlistName;
+    private int slideNb;
 
+    public JSONWritter(String playlistName) {
+        this.jsonObject = new JSONObject();
 
-    public SlideController() throws IOException {
-        this.slideDisplayNumber = 0;
-        this.texts = new ArrayList<>();
     }
 
 
 
-    private String initEmptySlide() {
+    public void addSlideToJson() {
+
+    }
+
+
+    private void initEmptySlide() {
+        this.jsonObject.put(playlistName, getEmptySlideCode());
+    }
+
+    private String getEmptySlideCode() {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "\n" +
                 "<?import javafx.scene.layout.BorderPane?>\n" +
@@ -76,44 +67,5 @@ public class SlideController {
 
 
                 ;
-    }
-
-    public void addTextButton(MouseEvent mouseEvent) throws IOException {
-        TextField text = new TextField("Appuyer pour modifier");
-        text.setLayoutX(slideDisplay.getLayoutX()/2);
-        text.setLayoutY(slideDisplay.getLayoutY()/2);
-        text.setStyle("-fx-border-color: black");
-        text.setStyle("-fx-background-color: white");
-        text.setPrefWidth(140);
-        slideDisplay.getChildren().add(text);
-
-        text.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                    if(mouseEvent.getClickCount() == 1 || mouseEvent.getClickCount() == 2){
-                        text.setEditable(true);
-                        text.setStyle("-fx-background-color: white");
-                    }
-                }
-                text.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                    @Override
-                    public void handle(KeyEvent event) {
-                        if(event.getCode() == KeyCode.ENTER) {
-                            text.setEditable(false);
-                            text.setStyle("-fx-background-color: beige");
-                        }
-
-
-
-                    }
-                });
-            }
-        });
-
-
-
-
     }
 }
