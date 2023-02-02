@@ -4,19 +4,18 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class JSONExtraction {
     private File jsonFile;
     private String jsonString = "";
-    private Map<String, String> jsonContent;
+    private Map<String, String> jsonMap;
     private JSONObject jsonObject;
 
     public JSONExtraction(File file) {
         this.jsonFile = file;
-        this.jsonContent = new HashMap<>();
+        this.jsonMap = new HashMap<>();
     }
 
     public void extract() throws IOException {
@@ -27,16 +26,20 @@ public class JSONExtraction {
         this.jsonObject = new JSONObject(this.jsonString);
     }
 
-    public String getPlayListName() {
-        return this.jsonObject.getString("VieScolaire");
+    public void initMap() {
+        for(String key : this.jsonObject.keySet()) this.jsonMap.put(key, getValue(key));
+    }
+
+    public String getValue(String key) {
+        return this.jsonObject.getString(key);
     }
 
     public Set<String> getKey() {
         return this.jsonObject.keySet();
     }
 
-    public Map<String, String> getJsonContent() {
-        return jsonContent;
+    public Map<String, String> getJsonMap() {
+        return this.jsonMap;
     }
 
     public String getJsonString() {

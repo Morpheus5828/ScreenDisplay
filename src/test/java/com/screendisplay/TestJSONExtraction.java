@@ -26,4 +26,11 @@ public class TestJSONExtraction {
         Assertions.assertEquals(jsonExtraction.getKey().toString(), "[playListName, slide0]");
     }
 
+    @Test
+    public void testInitMap() throws IOException {
+        jsonExtraction.extract();
+        jsonExtraction.initMap();
+        Assertions.assertEquals(jsonExtraction.getJsonMap().toString(), "{playListName=VieScolaire, slide0=}");
+    }
+
 }

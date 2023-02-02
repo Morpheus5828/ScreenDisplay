@@ -1,33 +1,54 @@
 package com.screendisplay.Model;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.HashMap;
+import java.util.Map;
 
-public class JSONWritter {
-    private final String path = "C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists";
-    private JSONObject jsonObject;
+public class JSONWriter {
+    private File jsonFile;
+    private Map<String, String> jsonMap;
     private String playlistName;
-    private int slideNb;
 
-    public JSONWritter(String playlistName) {
-        this.jsonObject = new JSONObject();
-
+    /* PlayList already exist */
+    public JSONWriter(File file) {
+        //TODO check if file already exist
+        this.jsonFile = file;
+        this.jsonMap = new HashMap<>();
+    }
+    /* Create a new playlist */
+    public JSONWriter(String playListName) {
+        File file = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists\\" + playListName);
+        JSONExtraction jsonExtraction = new JSONExtraction(file);
+        this.jsonMap = jsonExtraction.getJsonMap();
     }
 
 
-
-    public void addSlideToJson() {
-
+    public void addNewSlide() {
+        this.jsonMap.put("Slide" + getSlideNb(),getEmptySlide());
     }
 
-
-    private void initEmptySlide() {
-        this.jsonObject.put(playlistName, getEmptySlideCode());
+    public void removeSlide(int number) {
+        System.out.println("Slide" + number);
+        this.jsonMap.remove("Slide" + number);
     }
 
-    private String getEmptySlideCode() {
+    private int getSlideNb() {
+        return this.jsonMap.size() + 1;
+    }
+
+    public File getJsonFile() {
+        return jsonFile;
+    }
+
+    public Map<String, String> getJsonMap() {
+        return this.jsonMap;
+    }
+
+    private String getEmptySlide() {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "\n" +
                 "<?import javafx.scene.layout.BorderPane?>\n" +
@@ -68,4 +89,7 @@ public class JSONWritter {
 
                 ;
     }
+
+
+
 }
