@@ -3,18 +3,27 @@ package com.screendisplay;
 import com.screendisplay.Model.JSONExtraction;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.io.File;
-
-
+import java.io.IOException;
 
 public class TestJSONExtraction {
+    private File json = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists\\JSONTest");
+    private JSONExtraction jsonExtraction = new JSONExtraction(json);
+
 
     @Test
-    public void testExtract() {
-        File json = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists\\JSONTest.json");
-        JSONExtraction jsonExtraction = new JSONExtraction(json);
-        Assertions.assertEquals("d", "c");
+    public void testExtract() throws IOException {
+        String jsonContent = "{    \"playListName\":\"VieScolaire\",    \"slide0\":{}}";
+        jsonExtraction.extract();
+        Assertions.assertEquals(jsonExtraction.getJsonString(), jsonContent);
+    }
+
+    @Test
+    public void testGetKey() throws IOException {
+        jsonExtraction.extract();
+        Assertions.assertEquals(jsonExtraction.getKey().toString(), "[playListName, slide0]");
     }
 
 }
