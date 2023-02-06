@@ -1,12 +1,11 @@
 package com.screendisplay.Controller;
 
-import com.screendisplay.Controller.Slide.SlideManagement;
 import com.screendisplay.HelloApplication;
+import com.screendisplay.Model.JSONManagment;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -27,7 +26,7 @@ public class PlayListController {
     @FXML private StackPane stackPane;
     private Stage playlistConfigStage;
 
-    private Map<Button, SlideManagement> playlistButtonRedirection = new HashMap<>();
+    private Map<Button, JSONManagment> playlistButtonRedirection = new HashMap<>();
 
     public void addPlaylist(ActionEvent actionEvent) throws IOException {
         openPlayListConfiguration();
@@ -83,12 +82,31 @@ public class PlayListController {
     }
 
     private Button createButtonPlaylist(String name) throws IOException {
-        SlideManagement slide = new SlideManagement();
         Button button = new Button(name);
+        JSONManagment jsonManagment = new JSONManagment(button.getText());
         // add action event to this button
-        playlistButtonRedirection.put(button,slide);
+        addButtonEventListener(button, jsonManagment.getFirstSlidePath());
+        playlistButtonRedirection.put(button, jsonManagment);
         return button;
+    }
 
+    public void addButtonEventListener(Button button, String path) {
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println(path);
+                /*FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(path));
+                Parent fxml = null;
+                try {
+                    fxml = fxmlLoader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stackPane.getChildren().clear();
+                stackPane.getChildren().removeAll();
+                stackPane.getChildren().setAll(fxml);*/
+            }
+        });
     }
 
 

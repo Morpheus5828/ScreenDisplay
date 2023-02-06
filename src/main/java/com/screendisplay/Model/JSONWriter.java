@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class JSONWriter {
     private File jsonFile;
@@ -21,18 +22,16 @@ public class JSONWriter {
     }
     /* Create a new playlist */
     public JSONWriter(String playListName) {
-        File file = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists\\" + playListName);
-        JSONExtraction jsonExtraction = new JSONExtraction(file);
+        this.jsonFile = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists\\" + playListName);
+        JSONExtraction jsonExtraction = new JSONExtraction(this.jsonFile);
         this.jsonMap = jsonExtraction.getJsonMap();
     }
-
 
     public void addNewSlide() {
         this.jsonMap.put("Slide" + getSlideNb(),getEmptySlide());
     }
 
     public void removeSlide(int number) {
-        System.out.println("Slide" + number);
         this.jsonMap.remove("Slide" + number);
     }
 
@@ -90,6 +89,26 @@ public class JSONWriter {
                 ;
     }
 
+    public String getJsonPath() {
+        return this.jsonFile.getPath();
+    }
 
+    public String getValue(String key) {
+        return this.jsonMap.get(key);
+    }
+
+    public void createFXML() {
+        for(String key : this.jsonMap.keySet()) {
+            try {
+                File file = new File(getValue(key) + ".fxml");
+                FileWriter myWriter = new FileWriter(file);
+                myWriter.write(getValue(key)); // all data from JSON Slide
+                myWriter.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 
 }
