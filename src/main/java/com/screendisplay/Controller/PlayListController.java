@@ -1,22 +1,22 @@
 package com.screendisplay.Controller;
 
-import com.screendisplay.HelloApplication;
-import com.screendisplay.Model.JSONManagment;
+import com.screendisplay.Model.JSONManagement;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -24,9 +24,16 @@ public class PlayListController {
     @FXML private Button createPlaylist;
     @FXML private Pane playlistPane;
     @FXML private StackPane stackPane;
+    @FXML private VBox vboxButtonPlayList;
     private Stage playlistConfigStage;
+    private List<Button> buttonList;
 
-    private Map<Button, JSONManagment> playlistButtonRedirection = new HashMap<>();
+    public PlayListController() {
+        this.buttonList = new ArrayList<>();
+        this.stackPane = new StackPane();
+        this.vboxButtonPlayList = new VBox();
+        this.stackPane.getChildren().add(this.vboxButtonPlayList);
+    }
 
     public void addPlaylist(ActionEvent actionEvent) throws IOException {
         openPlayListConfiguration();
@@ -54,8 +61,7 @@ public class PlayListController {
                         alert.show();
                     } else {
                         Button button = createButtonPlaylist(playlistName.getText());
-                        stackPane.getChildren().add(button);
-
+                        vboxButtonPlayList.getChildren().add(button);
                         playlistConfigStage.close();
                     }
                 } catch (IOException e) {
@@ -83,33 +89,17 @@ public class PlayListController {
 
     private Button createButtonPlaylist(String name) throws IOException {
         Button button = new Button(name);
-        JSONManagment jsonManagment = new JSONManagment(button.getText());
+
         // add action event to this button
-        addButtonEventListener(button, jsonManagment.getFirstSlidePath());
-        playlistButtonRedirection.put(button, jsonManagment);
+
         return button;
     }
 
-    public void addButtonEventListener(Button button, String path) {
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println(path);
-                /*FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(path));
-                Parent fxml = null;
-                try {
-                    fxml = fxmlLoader.load();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                stackPane.getChildren().clear();
-                stackPane.getChildren().removeAll();
-                stackPane.getChildren().setAll(fxml);*/
-            }
-        });
+    public VBox getVboxButtonPlayList() {
+        return vboxButtonPlayList;
     }
 
-
+    /* Tool method */
     private boolean hasCharacter(String word) {
         if(word.length() == 0) return false;
         for(char s : word.toCharArray()) {
@@ -117,8 +107,6 @@ public class PlayListController {
         }
         return false;
     }
-
-
 
 
 }

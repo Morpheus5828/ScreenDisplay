@@ -1,6 +1,6 @@
 package com.screendisplay;
 
-import com.screendisplay.Model.JSONManagment;
+import com.screendisplay.Model.JSONManagement;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.io.IOException;
 public class TestJSONManagment {
     @Test
     public void testConstructor() throws IOException {
-        JSONManagment js = new JSONManagment("test");
+        JSONManagement js = new JSONManagement("test");
 
     }
 }

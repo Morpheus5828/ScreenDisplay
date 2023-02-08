@@ -14,8 +14,5 @@
    </center>
    <left>
       <Pane prefHeight="201.0" prefWidth="110.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
-         <children>
-            <Button layoutX="29.0" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#addTextButton" text="TEXTE" />
-         </children></Pane>
    </left>
 </BorderPane>

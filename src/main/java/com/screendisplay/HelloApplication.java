@@ -1,10 +1,16 @@
 package com.screendisplay;
 
+import com.screendisplay.Controller.PlayListController;
+import com.screendisplay.Model.FXMLWriter;
+import com.screendisplay.Model.JSONManagement;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
@@ -17,7 +23,12 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.setMinHeight(600);
         stage.setMinWidth(800);
+        loadPlayListFXML();
         stage.show();
+    }
+
+    public void loadPlayListFXML() throws IOException {
+        new JSONManagement(new PlayListController()).load();
     }
 
     public static void main(String[] args) {
