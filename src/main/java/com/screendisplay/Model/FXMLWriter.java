@@ -11,7 +11,7 @@ public class FXMLWriter {
     private File file;
     private String path;
 
-    public FXMLWriter(String playListName, int number, String contain) {
+    public FXMLWriter(String playListName, int number, String contain) throws IOException {
         this.contain = contain;
         this.number = number;
         this.playListName = playListName;
@@ -36,9 +36,9 @@ public class FXMLWriter {
     }
 
     private void createRepo(String string) throws IOException {
-        File file = new File(this.path + "\\" + string);
-        FileWriter myWriter = new FileWriter(file);
-        myWriter.close();
+        System.out.println(this.path + "\\" + string);
+        File repo = new File(this.path + "\\" + string);
+        repo.mkdir();
         this.path += "\\" + string;
     }
 

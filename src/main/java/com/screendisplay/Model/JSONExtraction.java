@@ -17,19 +17,28 @@ public class JSONExtraction {
         this.jsonFile = file;
         this.jsonMap = new HashMap<>();
         extract();
-    }
-
-    public void extract() throws IOException {
-        Reader reader = new FileReader(this.jsonFile);
-        BufferedReader bufferedReader = new BufferedReader(reader);
-        String line;
-        while((line = bufferedReader.readLine()) != null) this.jsonString += line;
-        this.jsonObject = new JSONObject(this.jsonString);
         initMap();
     }
 
+    public void extract() throws IOException {
+        try {
+            Reader reader = new FileReader(this.jsonFile);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String line;
+            while((line = bufferedReader.readLine()) != null) this.jsonString += line;
+            this.jsonObject = new JSONObject(this.jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("FAILED - JSON Extraction");
+        }
+    }
+
     private void initMap() {
-        for(String key : this.jsonObject.keySet()) this.jsonMap.put(key, getValue(key));
+        try {
+            for(String key : this.jsonObject.keySet()) this.jsonMap.put(key, getValue(key));
+        } catch (Exception e) {
+            System.out.println("FAILED - JSON Map Initialisation");
+        }
     }
 
     public String getValue(String key) {
@@ -49,9 +58,15 @@ public class JSONExtraction {
     }
 
     public void loadFXML() {
-        for(int index = 0; index < this.jsonMap.size(); index++) {
-             new FXMLWriter(this.getPlayListName(), index, this.jsonMap.get("slide" + index)).create();
-        }
+       try {
+           int nb = 0;
+           for(int index = 1; index < this.jsonMap.size(); index++) {
+               new FXMLWriter(this.getPlayListName(), nb, this.jsonMap.get("slide" + nb)).create();
+               nb++;
+           }
+       } catch (Exception e) {
+           System.out.println("FAILED - LoadFxml ");
+       }
     }
 
     public String getPlayListName() { return this.jsonMap.get("playListName");}

@@ -35,6 +35,7 @@ public class JSONManagement {
             for(File file : PLRepo) {
                 // check if file isn't FXML repository
                 if(!file.getName().equals("FXML")) {
+                    //System.out.println("yes");
                     this.je = new JSONExtraction(file);
                     this.je.loadFXML();
                 }
