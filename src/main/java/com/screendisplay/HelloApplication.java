@@ -24,7 +24,7 @@ public class HelloApplication extends Application {
         stage.setMinHeight(600);
         stage.setMinWidth(800);
         loadPlayListFXML();
-        stage.show();
+        //stage.show();
     }
 
     public void loadPlayListFXML() throws IOException {

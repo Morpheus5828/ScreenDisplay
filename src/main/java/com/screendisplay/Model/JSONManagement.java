@@ -7,19 +7,18 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class JSONManagement {
-    private File[] playListRepository;
+    private File[] PLListRepo;
+    private File[] PLRepo;
     private List<Button> buttonPlayList;
     private PlayListController playListController;
-    private JSONExtraction jsonExtraction;
+    private JSONExtraction je;
 
     public JSONManagement(PlayListController playListController) {
         this.buttonPlayList = new ArrayList<>();
@@ -27,21 +26,23 @@ public class JSONManagement {
     }
 
     public void load() throws IOException {
-        playListRepository = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists").listFiles();
-        if(playListRepository != null) {
-            for(File file : playListRepository) {
-                this.jsonExtraction = new JSONExtraction(file);
-                for(int index = 0; index < this.jsonExtraction.getJsonMap().size(); index++)
-                    new FXMLWriter(index, this.jsonExtraction.getJsonMap().get("slide0")).create();
-
-                Button redirection = new Button(this.jsonExtraction.getPlayListName());
-                addEvent(redirection, file);
-                this.buttonPlayList.add(redirection);
+        PLListRepo = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists").listFiles();
+        // search all FXML file,  PLAYLISTS
+        for(int index = 0; index < PLListRepo.length; index++) {
+            PLRepo = PLListRepo[index].listFiles();
+            // EXTRACT JSON
+            assert PLRepo != null;
+            for(File file : PLRepo) {
+                // check if file isn't FXML repository
+                if(!file.getName().equals("FXML")) {
+                    this.je = new JSONExtraction(file);
+                    this.je.loadFXML();
+                }
             }
         }
     }
 
-    private void addEvent(Button button, File file) {
+    /*private void addEvent(Button button, String string) {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -56,6 +57,6 @@ public class JSONManagement {
                 }
             }
         });
-    }
+    }*/
 
 }

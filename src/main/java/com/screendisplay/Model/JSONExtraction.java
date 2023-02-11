@@ -48,6 +48,12 @@ public class JSONExtraction {
         return jsonString;
     }
 
+    public void loadFXML() {
+        for(int index = 0; index < this.jsonMap.size(); index++) {
+             new FXMLWriter(this.getPlayListName(), index, this.jsonMap.get("slide" + index)).create();
+        }
+    }
+
     public String getPlayListName() { return this.jsonMap.get("playListName");}
 
 }
