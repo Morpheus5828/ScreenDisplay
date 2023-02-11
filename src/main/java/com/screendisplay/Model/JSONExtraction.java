@@ -28,7 +28,6 @@ public class JSONExtraction {
             while((line = bufferedReader.readLine()) != null) this.jsonString += line;
             this.jsonObject = new JSONObject(this.jsonString);
         } catch (Exception e) {
-            e.printStackTrace();
             System.out.println("FAILED - JSON Extraction");
         }
     }

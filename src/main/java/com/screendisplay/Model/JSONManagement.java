@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,14 +34,31 @@ public class JSONManagement {
             // EXTRACT JSON
             assert PLRepo != null;
             for(File file : PLRepo) {
-                // check if file isn't FXML repository
-                if(!file.getName().equals("FXML")) {
-                    //System.out.println("yes");
-                    this.je = new JSONExtraction(file);
-                    this.je.loadFXML();
-                }
+                this.je = new JSONExtraction(file);
+                this.je.loadFXML();
+
             }
         }
+    }
+
+    public void removeFXMLs() throws IOException {
+        PLListRepo = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists").listFiles();
+        // search all FXML file,  PLAYLISTS
+        for(File file : PLListRepo) {
+            if(!file.getName().equals("JSON")) FileUtils.deleteDirectory(file);
+
+        }
+
+    }
+
+    boolean deleteDirectory(File directoryToBeDeleted) {
+        File[] allContents = directoryToBeDeleted.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteDirectory(file);
+            }
+        }
+        return directoryToBeDeleted.delete();
     }
 
     /*private void addEvent(Button button, String string) {

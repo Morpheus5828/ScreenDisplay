@@ -31,10 +31,6 @@ public class FXMLWriter {
         }
     }
 
-    public String getPath() {
-        return this.file.getAbsolutePath();
-    }
-
     private void createRepo(String string) throws IOException {
         System.out.println(this.path + "\\" + string);
         File repo = new File(this.path + "\\" + string);
@@ -42,7 +38,4 @@ public class FXMLWriter {
         this.path += "\\" + string;
     }
 
-    public String getContain() {
-        return contain;
-    }
 }

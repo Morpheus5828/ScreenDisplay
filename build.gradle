@@ -34,6 +34,7 @@ javafx {
 }
 
 dependencies {
+    implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.json:json:20220320'
     implementation group: 'com.jfoenix', name: 'jfoenix', version: '9.0.10'
     implementation 'org.junit.jupiter:junit-jupiter:5.9.2'
