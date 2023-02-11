@@ -13,6 +13,8 @@ import java.util.Set;
 public class JSONWriter {
     private File jsonFile;
     private Map<String, String> jsonMap;
+    private String playListName;
+    private int slideNb = 0;
 
     /* PlayList already exist */
     public JSONWriter(File file) throws IOException {
@@ -22,21 +24,34 @@ public class JSONWriter {
         }
     }
     /* Create a new playlist */
-    public JSONWriter(String playListName) {
-        this.jsonFile = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists\\" + playListName);
+    public JSONWriter(String playListName) throws IOException {
+        this.jsonFile = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists\\JSON\\" + playListName);
         this.jsonMap = new HashMap<>();
+        this.jsonMap.put("playListName", playListName);
+        this.playListName = playListName;
+        addNewSlide();
+        write();
     }
 
-    public void addNewSlide() {
-        this.jsonMap.put("Slide" + getSlideNb(),getEmptySlide());
+    public void write() throws IOException {
+        JSONObject jo = new JSONObject(this.jsonMap);
+        FileWriter writer = new FileWriter(this.jsonFile);
+        writer.write(jo.toString());
+        writer.close();
+    }
+
+    public void addNewSlide() throws IOException {
+        this.jsonMap.put("slide" + getSlideNb(), getEmptySlide());
+        this.slideNb++;
+        loadFXML(getSlideNb() - 1);
     }
 
     public void removeSlide(int number) {
-        this.jsonMap.remove("Slide" + number);
+        this.jsonMap.remove("slide" + number);
     }
 
     private int getSlideNb() {
-        return this.jsonMap.size() + 1;
+        return this.slideNb;
     }
 
     public File getJsonFile() {
@@ -54,7 +69,7 @@ public class JSONWriter {
                 "<?import javafx.scene.layout.BorderPane?>\n" +
                 "<?import javafx.scene.layout.Pane?>\n" +
                 "\n" +
-                "<BorderPane fx:id='borderPane' maxHeight='-Infinity' maxWidth='-Infinity' minHeight='-Infinity' minWidth='-Infinity' prefHeight='264.0' prefWidth='394.0' xmlns='http://javafx.com/javafx/19' xmlns:fx='http://javafx.com/fxml/1' fx:controller='com.screendisplay.Controller.Slide.SlideController'>\n" +
+                "<BorderPane fx:id='borderPane' maxHeight='-Infinity' maxWidth='-Infinity' minHeight='-Infinity' minWidth='-Infinity' prefHeight='264.0' prefWidth='394.0' xmlns='http://javafx.com/javafx/19' xmlns:fx='http://javafx.com/fxml/1'>\n" +
                 "   <center>\n" +
                 "      <Pane fx:id='pane' prefHeight='259.0' prefWidth='290.0' BorderPane.alignment='CENTER'>\n" +
                 "         <children>\n" +
@@ -63,7 +78,7 @@ public class JSONWriter {
                 "      </Pane>\n" +
                 "   </center>\n" +
                 "   <left>\n" +
-                "      <Pane prefHeight='201.0' prefWidth='110.0' style='-fx-background-color: grey;' BorderPane.alignment='CENTER'>\n" +
+                "      <Pane prefHeight='201.0' prefWidth='110.0' style='-fx-background-color: grey;' BorderPane.alignment='CENTER'/>\n" +
                 "   </left>\n" +
                 "</BorderPane>\n";
     }
@@ -78,5 +93,9 @@ public class JSONWriter {
 
     public String getPlayListName() {
         return getValue("playListName");
+    }
+
+    public void loadFXML(int nb) throws IOException {
+        new FXMLWriter(this.getPlayListName(), nb, getEmptySlide()).create();
     }
 }

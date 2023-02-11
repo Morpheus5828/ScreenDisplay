@@ -29,8 +29,8 @@ public class HelloApplication extends Application {
         stage.setMinHeight(600);
         stage.setMinWidth(800);
 
-        loadPlayListFXML();
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        //loadPlayListFXML();
+        /*stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
                 try {
@@ -39,7 +39,7 @@ public class HelloApplication extends Application {
                     System.out.println("FAILED - Remove FXML file");
                 }
             }
-        });
+        });*/
 
         stage.show();
     }

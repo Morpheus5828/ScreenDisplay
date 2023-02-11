@@ -1,23 +1,36 @@
 package com.screendisplay.Controller;
 
+import com.screendisplay.Controller.Slide.SlideController;
+import com.screendisplay.HelloApplication;
 import com.screendisplay.Model.JSONManagement;
+import com.screendisplay.Model.JSONWriter;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
+import java.io.File;
 import java.io.IOException;
+import org.xml.sax.XMLReader;
+
+import javax.security.auth.login.Configuration;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 
 public class PlayListController {
@@ -60,8 +73,9 @@ public class PlayListController {
                         alert.setContentText("La nouvelle playlist n'a pas de nom attribué");
                         alert.show();
                     } else {
+                        new JSONWriter(playlistName.getText());
                         Button button = createButtonPlaylist(playlistName.getText());
-                        vboxButtonPlayList.getChildren().add(button);
+                        stackPane.getChildren().add(button);
                         playlistConfigStage.close();
                     }
                 } catch (IOException e) {
@@ -87,16 +101,35 @@ public class PlayListController {
         playlistConfigStage.show();
     }
 
-    private Button createButtonPlaylist(String name) throws IOException {
-        Button button = new Button(name);
-
-        // add action event to this button
-
+    private Button createButtonPlaylist(String repo) throws IOException {
+        Button button = new Button(repo);
+        addEvent(button, "src/main/resources/com/screendisplay/playLists/" + repo + "/slide0.fxml");
         return button;
     }
 
-    public VBox getVboxButtonPlayList() {
-        return vboxButtonPlayList;
+    private void addEvent(Button button, String file) {
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    System.out.println(file);
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(new File(file).toURI().toURL());
+                        Parent root = fxmlLoader.load();
+                        stackPane.getChildren().setAll(root);
+                        stackPane.getChildren().removeAll();
+                        stackPane.getChildren().setAll(root);
+                    } catch (MalformedURLException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     /* Tool method */

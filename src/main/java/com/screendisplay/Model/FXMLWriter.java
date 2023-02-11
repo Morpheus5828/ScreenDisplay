@@ -21,9 +21,10 @@ public class FXMLWriter {
     public void create() {
         try {
             createRepo(playListName);
-            createRepo("FXML");
             this.file = new File(this.path + "\\slide" + number + ".fxml");
+            this.file = new File(this.path + "\\slide0.fxml");
             FileWriter myWriter = new FileWriter(file);
+            //System.out.println(contain);
             myWriter.write(contain); // all data from JSON Slide
             myWriter.close();
         } catch (Exception e) {
