@@ -23,7 +23,7 @@
    <bottom>
       <Pane prefHeight="328.0" prefWidth="600.0" style="-fx-background-color: beige;" BorderPane.alignment="CENTER">
          <children>
-            <StackPane fx:id="playListListSp" prefHeight="328.0" prefWidth="600.0">
+            <StackPane fx:id="playListListSp" onMouseMoved="#addButtonPlayLists" prefHeight="328.0" prefWidth="600.0">
             </StackPane>
          </children></Pane>
    </bottom>

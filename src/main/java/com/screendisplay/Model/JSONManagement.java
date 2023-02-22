@@ -1,5 +1,6 @@
 package com.screendisplay.Model;
 
+import com.screendisplay.Controller.Controller;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import org.apache.commons.io.FileUtils;
@@ -12,13 +13,9 @@ import java.util.List;
 public class JSONManagement {
     private File[] PLListRepo;
     private File[] PLRepo;
-    private List<Button> buttonPlayList;
     private JSONExtraction je;
-    private StackPane stackPane;
 
-    public JSONManagement() {
-        this.buttonPlayList = new ArrayList<>();
-    }
+    public JSONManagement() {}
     public void load() throws IOException {
         try {
             PLListRepo = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists").listFiles();
@@ -30,7 +27,7 @@ public class JSONManagement {
                 for (File file : PLRepo) {
                     this.je = new JSONExtraction(file);
                     this.je.loadFXML();
-                    //this.vb.addButton(new Button(this.je.getPlayListName()));
+                    Controller.buttonsPlaylist.add(new Button(this.je.getPlayListName()));
                 }
             }
             //this.vb.writeCode();

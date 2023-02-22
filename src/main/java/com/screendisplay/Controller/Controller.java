@@ -5,6 +5,7 @@ import com.screendisplay.Model.FXMLWriter;
 import com.screendisplay.Model.JSONWriter;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,11 +14,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +29,7 @@ import java.net.URL;
 import java.util.*;
 
 public class Controller  implements Initializable{
-    //public static String name = "tony";
+    public static List<Button> buttonsPlaylist = new ArrayList<>();
     /* Main page properties */
     @FXML private Button screen;
     @FXML private Button playlist;
@@ -39,7 +42,6 @@ public class Controller  implements Initializable{
     @FXML private Button createPlaylist;
     @FXML private StackPane playListListSp;
     private Stage playlistConfigStage;
-    private Set<Button> buttonList = new HashSet<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -89,6 +91,17 @@ public class Controller  implements Initializable{
     }
 
     /* Playlist methods */
+    public void addButtonPlayLists() {
+        this.playListListSp.setOnMouseMoved(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+
+            }
+        });
+        for(Button button : buttonsPlaylist)
+            playListListSp.getChildren().add(button);
+    }
+
     public void addPlaylist(ActionEvent actionEvent) throws IOException {
         openPlayListConfiguration();
     }
@@ -117,7 +130,6 @@ public class Controller  implements Initializable{
                         new JSONWriter(playlistName.getText());
                         List<Button> list = new ArrayList<>();
                         Button button = createButtonPlaylist(playlistName.getText());
-                        buttonList.add(button);
                         list.add(button);
                         playListListSp.getChildren().add(button);
                         new FXMLWriter().writeCode(list);
@@ -149,7 +161,6 @@ public class Controller  implements Initializable{
     public Button createButtonPlaylist(String repo) throws IOException {
         Button button = new Button(repo);
         addEvent(button, "src/main/resources/com/screendisplay/playLists/" + repo + "/slide0.fxml");
-        buttonList.add(button);
         return button;
     }
 
