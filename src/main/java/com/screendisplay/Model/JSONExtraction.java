@@ -28,7 +28,7 @@ public class JSONExtraction {
             while((line = bufferedReader.readLine()) != null) this.jsonString += line;
             this.jsonObject = new JSONObject(this.jsonString);
         } catch (Exception e) {
-            System.out.println("FAILED - JSON Extraction");
+            System.err.println("FAILED - JSON Extraction");
         }
     }
 
@@ -36,7 +36,7 @@ public class JSONExtraction {
         try {
             for(String key : this.jsonObject.keySet()) this.jsonMap.put(key, getValue(key));
         } catch (Exception e) {
-            System.out.println("FAILED - JSON Map Initialisation");
+            System.err.println("FAILED - JSON Map Initialisation");
         }
     }
 
@@ -64,7 +64,7 @@ public class JSONExtraction {
                nb++;
            }
        } catch (Exception e) {
-           System.out.println("FAILED - LoadFxml ");
+           System.err.println("FAILED - LoadFxml ");
        }
     }
 
