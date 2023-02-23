@@ -15,20 +15,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
-public class Controller  implements Initializable{
+public class Controller implements Initializable{
     public static List<Button> buttonsPlaylist = new ArrayList<>();
     /* Main page properties */
     @FXML private Button screen;
@@ -41,6 +39,7 @@ public class Controller  implements Initializable{
     @FXML private Pane playlistPane;
     @FXML private Button createPlaylist;
     @FXML private StackPane playListListSp;
+    @FXML private VBox playlistConfigVbox;
     private Stage playlistConfigStage;
 
     @Override
@@ -92,14 +91,14 @@ public class Controller  implements Initializable{
 
     /* Playlist methods */
     public void addButtonPlayLists() {
-        this.playListListSp.setOnMouseMoved(new EventHandler<MouseEvent>() {
+        this.playlistConfigBp.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
 
             }
         });
         for(Button button : buttonsPlaylist)
-            playListListSp.getChildren().add(button);
+            playlistConfigVbox.getChildren().add(button);
     }
 
     public void addPlaylist(ActionEvent actionEvent) throws IOException {
@@ -131,8 +130,9 @@ public class Controller  implements Initializable{
                         List<Button> list = new ArrayList<>();
                         Button button = createButtonPlaylist(playlistName.getText());
                         list.add(button);
-                        playListListSp.getChildren().add(button);
-                        new FXMLWriter().writeCode(list);
+                        playlistConfigVbox.getChildren().add(button);
+                        File file = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\_buttonPlaylist.txt");
+                        new FileWriter(file).write(list.toString());
                         playlistConfigStage.close();
                     }
                 } catch (IOException e) {

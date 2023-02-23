@@ -4,10 +4,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="playlistConfigBp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.screendisplay.Controller.Controller">
+<BorderPane onMouseMoved="#addButtonPlayLists" fx:id="playlistConfigBp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.screendisplay.Controller.Controller">
    <top>
       <Pane fx:id="playlistPane" prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: blue;" BorderPane.alignment="CENTER">
          <children>
@@ -23,8 +24,10 @@
    <bottom>
       <Pane prefHeight="328.0" prefWidth="600.0" style="-fx-background-color: beige;" BorderPane.alignment="CENTER">
          <children>
-            <StackPane fx:id="playListListSp" onMouseMoved="#addButtonPlayLists" prefHeight="328.0" prefWidth="600.0">
-            </StackPane>
+            <StackPane fx:id="playListListSp" prefHeight="328.0" prefWidth="600.0">
+               <children>
+                  <VBox fx:id="playlistConfigVbox" maxHeight="200.0" maxWidth="326.0" prefHeight="200.0" prefWidth="326.0" style="-fx-background-color: red;" />
+               </children></StackPane>
          </children></Pane>
    </bottom>
 </BorderPane>
