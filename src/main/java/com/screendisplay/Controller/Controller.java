@@ -21,11 +21,10 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.Buffer;
 import java.util.*;
 
 public class Controller implements Initializable{
@@ -93,6 +92,10 @@ public class Controller implements Initializable{
         contentArea.getChildren().setAll(fxml);
     }
 
+    public void saveSlideUpdate() {
+        //System.out.println(slideDisplay.getChildren());
+    }
+
     /* Playlist methods */
     public void addButtonPlayLists() throws IOException {
         this.playlistConfigBp.setOnMouseMoved(new EventHandler<MouseEvent>() {
@@ -138,8 +141,13 @@ public class Controller implements Initializable{
                         list.add(button);
                         playlistConfigVbox.getChildren().add(button);
                         File file = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\_buttonPlaylist.txt");
+                        BufferedReader br = new BufferedReader(new FileReader(file));
+                        StringBuilder content = new StringBuilder();
+                        String st;
+                        while((st = br.readLine()) != null) content.append(st + "\n");
                         FileWriter f = new FileWriter(file);
-                        f.write(button.getText());
+                        f.write(String.valueOf(content));
+                        f.write(button.getText() + "\n");
                         f.close();
                         playlistConfigStage.close();
                     }
@@ -202,7 +210,6 @@ public class Controller implements Initializable{
         }
         return false;
     }
-
     /* Slide methods*/
     public void addTextToSlide() {
         TextField textField = new TextField();
@@ -230,17 +237,7 @@ public class Controller implements Initializable{
                 textField.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
             }
         });
-//        textField.setOnMouseEntered(new EventHandler<MouseEvent>() {
-//            @Override public void handle(MouseEvent mouseEvent) {
-//                textField.setCursor(Cursor.HAND);
-//                dropShadow.setInput(glow);
-//            }
-//        });
-//        label.setOnMouseExited(new EventHandler<MouseEvent>() {
-//            @Override public void handle(MouseEvent mouseEvent) {
-//                dropShadow.setInput(null);
-//            }
-//        });
+
     }
 
 
