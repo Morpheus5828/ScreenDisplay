@@ -9,6 +9,8 @@ import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -41,6 +43,8 @@ public class Controller implements Initializable{
     @FXML private StackPane playListListSp;
     @FXML private VBox playlistConfigVbox;
     private Stage playlistConfigStage;
+    /* SlideDisplay properties */
+    @FXML private Pane slideDisplay;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -90,17 +94,16 @@ public class Controller implements Initializable{
     }
 
     /* Playlist methods */
-    public void addButtonPlayLists() {
+    public void addButtonPlayLists() throws IOException {
         this.playlistConfigBp.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
 
             }
         });
-        for(Button button : buttonsPlaylist) {
-            addEvent(button, "src/main/resources/com/screendisplay/playLists/" + button.getText() + "/slide0.fxml");
-            playlistConfigVbox.getChildren().add(button);
-        }
+        for(Button button : buttonsPlaylist)
+            playlistConfigVbox.getChildren().add(createButtonPlaylist(button.getText()));
+
 
     }
 
@@ -191,7 +194,6 @@ public class Controller implements Initializable{
             }
         });
     }
-
     // Tool method
     private boolean hasCharacter(String word) {
         if(word.length() == 0) return false;
@@ -199,6 +201,46 @@ public class Controller implements Initializable{
             if(s != ' ') return true;
         }
         return false;
+    }
+
+    /* Slide methods*/
+    public void addTextToSlide() {
+        TextField textField = new TextField();
+        textField.setPromptText("Clicker pour modifier");
+        slideDisplay.getChildren().add(textField);
+
+        class Delta { double x, y; }
+        final Delta dragDelta = new Delta();
+        textField.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                // record a delta distance for the drag and drop operation.
+                dragDelta.x = textField.getLayoutX() - mouseEvent.getSceneX();
+                dragDelta.y = textField.getLayoutY() - mouseEvent.getSceneY();
+                textField.setCursor(Cursor.MOVE);
+            }
+        });
+        textField.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                textField.setCursor(Cursor.HAND);
+            }
+        });
+        textField.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                textField.setLayoutX(mouseEvent.getSceneX() + dragDelta.x);
+                textField.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
+            }
+        });
+//        textField.setOnMouseEntered(new EventHandler<MouseEvent>() {
+//            @Override public void handle(MouseEvent mouseEvent) {
+//                textField.setCursor(Cursor.HAND);
+//                dropShadow.setInput(glow);
+//            }
+//        });
+//        label.setOnMouseExited(new EventHandler<MouseEvent>() {
+//            @Override public void handle(MouseEvent mouseEvent) {
+//                dropShadow.setInput(null);
+//            }
+//        });
     }
 
 

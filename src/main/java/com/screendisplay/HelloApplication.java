@@ -1,7 +1,6 @@
 package com.screendisplay;
 
 import com.screendisplay.Controller.Controller;
-import com.screendisplay.Model.FXMLWriter;
 import com.screendisplay.Model.JSONManagement;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -16,7 +15,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HelloApplication extends Application {
     private JSONManagement jsonManagement;
@@ -34,17 +35,18 @@ public class HelloApplication extends Application {
 
         loadButton();
         loadPlayListFXML();
+
         // delete all fxml file after closing app
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                try {
-                    jsonManagement.removeFXMLs();
-                } catch (IOException e) {
-                    System.out.println("FAILED - Remove FXML file");
-                }
-            }
-        });
+//        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+//            @Override
+//            public void handle(WindowEvent event) {
+//                try {
+//                    jsonManagement.removeFXMLs();
+//                } catch (IOException e) {
+//                    System.out.println("FAILED - Remove FXML file");
+//                }
+//            }
+//        });
 
         stage.show();
     }
@@ -58,15 +60,11 @@ public class HelloApplication extends Application {
         // create algo FXML with button inside
         File file = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\_buttonPlaylist.txt");
         String line;
-        List<Button> buttonList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(file));
         while((line = br.readLine()) != null) {
             Button button = new Button(line);
             Controller.buttonsPlaylist.add(button);
-            buttonList.add(button);
         }
-        FXMLWriter fxmlWriter = new FXMLWriter();
-        fxmlWriter.writeCode(buttonList);
     }
 
     public static void main(String[] args) {

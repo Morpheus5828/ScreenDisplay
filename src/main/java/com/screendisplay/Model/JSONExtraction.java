@@ -1,5 +1,6 @@
 package com.screendisplay.Model;
 
+import javafx.scene.control.Button;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -56,17 +57,18 @@ public class JSONExtraction {
         return jsonString;
     }
 
-    public void loadFXML() {
-       try {
-           int nb = 0;
-           for(int index = 1; index < this.jsonMap.size(); index++) {
-               new FXMLWriter(this.getPlayListName(), nb, this.jsonMap.get("slide" + nb)).create();
-               nb++;
-           }
-       } catch (Exception e) {
-           System.err.println("FAILED - LoadFxml ");
-       }
-    }
+//    public void loadFXML(Button button) {
+//       try {
+//           //TODO add event to actual slide
+//           int nb = 0;
+//           for(int index = 1; index < this.jsonMap.size(); index++) {
+//               new FXMLWriter(this.getPlayListName(), nb, this.jsonMap.get("slide" + nb)).create();
+//               nb++;
+//           }
+//       } catch (Exception e) {
+//           System.err.println("FAILED - LoadFxml ");
+//       }
+//    }
 
     public String getPlayListName() { return this.jsonMap.get("playListName");}
 
