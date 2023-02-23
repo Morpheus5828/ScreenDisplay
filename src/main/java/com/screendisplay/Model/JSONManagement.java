@@ -27,7 +27,7 @@ public class JSONManagement {
                 for (File file : PLRepo) {
                     this.je = new JSONExtraction(file);
                     this.je.loadFXML();
-                    Controller.buttonsPlaylist.add(new Button(this.je.getPlayListName()));
+                    //Controller.buttonsPlaylist.add(new Button(this.je.getPlayListName()));
                 }
             }
             //this.vb.writeCode();

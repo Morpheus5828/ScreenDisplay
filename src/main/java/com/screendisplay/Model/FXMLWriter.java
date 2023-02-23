@@ -21,8 +21,6 @@ public class FXMLWriter {
         this.path = "C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\playLists";
     }
 
-    public FXMLWriter() {}
-
     public void createVboxButtonPlaylist() {
         File file = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\buttonPlaylist.txt");
 
@@ -48,38 +46,5 @@ public class FXMLWriter {
         repo.mkdir();
         this.path += "\\" + string;
     }
-
-    private String produceFXMLCode(List<Button> list) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for(Button button : list) stringBuilder.append("<Button text=\"").append(button.getText()).append("\"/>").append("\n");
-
-        String result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "\n" +
-                "<?import javafx.scene.control.Button?>\n" +
-                "<?import javafx.scene.layout.VBox?>\n" +
-                "\n" +
-                "\n" +
-                "<VBox fx:id=\"vboxButtonPlayList\" maxHeight=\"-Infinity\" maxWidth=\"-Infinity\" minHeight=\"-Infinity\" minWidth=\"-Infinity\" prefHeight=\"300.0\" prefWidth=\"500.0\" xmlns=\"http://javafx.com/javafx/19\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"com.screendisplay.Controller.VboxButtonPlayListController\">\n" +
-                "   <children>\n" +
-                stringBuilder +
-                "   </children>\n" +
-                "</VBox>\n";
-        return result;
-    }
-
-
-    public void writeCode(List<Button> list) throws IOException {
-        try {
-            File file = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\buttonPlaylist.txt");
-            FileWriter myWritter = new FileWriter(file);
-            myWritter.write(produceFXMLCode(list));
-            myWritter.close();
-
-        } catch (Exception e) {
-            System.out.println("FAILED - buttonPlaylist.txt");
-        }
-
-    }
-
 
 }

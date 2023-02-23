@@ -97,8 +97,11 @@ public class Controller implements Initializable{
 
             }
         });
-        for(Button button : buttonsPlaylist)
+        for(Button button : buttonsPlaylist) {
+            addEvent(button, "src/main/resources/com/screendisplay/playLists/" + button.getText() + "/slide0.fxml");
             playlistConfigVbox.getChildren().add(button);
+        }
+
     }
 
     public void addPlaylist(ActionEvent actionEvent) throws IOException {
@@ -132,7 +135,9 @@ public class Controller implements Initializable{
                         list.add(button);
                         playlistConfigVbox.getChildren().add(button);
                         File file = new File("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\_buttonPlaylist.txt");
-                        new FileWriter(file).write(list.toString());
+                        FileWriter f = new FileWriter(file);
+                        f.write(button.getText());
+                        f.close();
                         playlistConfigStage.close();
                     }
                 } catch (IOException e) {
@@ -169,7 +174,6 @@ public class Controller implements Initializable{
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    System.out.println(file);
                     try {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         fxmlLoader.setLocation(new File(file).toURI().toURL());
