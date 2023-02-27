@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane onMouseMoved="#addButtonPlayLists" fx:id="playlistConfigBp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.screendisplay.Controller.Controller">
+<BorderPane fx:id="playlistConfigBp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#addButtonPlayLists" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.screendisplay.v2.Controller.Controller">
    <top>
       <Pane fx:id="playlistPane" prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: blue;" BorderPane.alignment="CENTER">
          <children>
@@ -18,6 +18,7 @@
                </font>
             </Text>
             <Button fx:id="createPlaylist" layoutX="514.0" layoutY="23.0" mnemonicParsing="false" onAction="#addPlaylist" text="AJOUTER" />
+            <Button fx:id="saveSlideUpdate" layoutX="408.0" layoutY="23.0" mnemonicParsing="false" onAction="#saveModification" text="SAUVEGARDER" />
          </children>
       </Pane>
    </top>

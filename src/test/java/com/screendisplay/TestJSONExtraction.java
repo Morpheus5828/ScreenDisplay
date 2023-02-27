@@ -1,9 +1,8 @@
 package com.screendisplay;
 
-import com.screendisplay.Model.JSONExtraction;
+import com.screendisplay.v2.Model.JSONExtraction;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.screendisplay.Controller.Slide;
+package com.screendisplay.v2.Controller.Slide;
 
 import com.screendisplay.HelloApplication;
 import javafx.event.ActionEvent;

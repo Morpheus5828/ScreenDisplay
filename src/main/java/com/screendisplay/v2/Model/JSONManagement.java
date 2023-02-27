@@ -1,14 +1,9 @@
-package com.screendisplay.Model;
+package com.screendisplay.v2.Model;
 
-import com.screendisplay.Controller.Controller;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class JSONManagement {
     private File[] PLListRepo;

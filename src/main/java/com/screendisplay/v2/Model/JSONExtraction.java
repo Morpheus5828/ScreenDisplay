@@ -1,4 +1,4 @@
-package com.screendisplay.Model;
+package com.screendisplay.v2.Model;
 
 import org.json.JSONObject;
 

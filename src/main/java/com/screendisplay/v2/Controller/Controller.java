@@ -1,11 +1,9 @@
-package com.screendisplay.Controller;
+package com.screendisplay.v2.Controller;
 
 import com.screendisplay.HelloApplication;
-import com.screendisplay.Model.FXMLWriter;
-import com.screendisplay.Model.JSONWriter;
+import com.screendisplay.v2.Model.JSONWriter;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.FileWriter;

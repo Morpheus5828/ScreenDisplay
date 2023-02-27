@@ -1,6 +1,6 @@
 package com.screendisplay;
 
-import com.screendisplay.Model.JSONManagement;
+import com.screendisplay.v2.Model.JSONManagement;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

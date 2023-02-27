@@ -7,9 +7,9 @@ module com.screendisplay {
 
     opens com.screendisplay to javafx.fxml;
     exports com.screendisplay;
-    exports com.screendisplay.Controller;
-    opens com.screendisplay.Controller to javafx.fxml;
-    opens com.screendisplay.Controller.Slide to javafx.fxml;
-    exports com.screendisplay.Controller.Slide;
+    exports com.screendisplay.v2.Controller;
+    opens com.screendisplay.v2.Controller to javafx.fxml;
+    opens com.screendisplay.v2.Controller.Slide to javafx.fxml;
+    exports com.screendisplay.v2.Controller.Slide;
 
 }

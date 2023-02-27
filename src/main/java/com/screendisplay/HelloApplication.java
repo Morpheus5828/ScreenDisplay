@@ -1,8 +1,7 @@
 package com.screendisplay;
 
-import com.screendisplay.Controller.Controller;
-import com.screendisplay.Model.FXMLWriter;
-import com.screendisplay.Model.JSONManagement;
+import com.screendisplay.v2.Controller.Controller;
+import com.screendisplay.v2.Model.JSONManagement;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -65,8 +64,8 @@ public class HelloApplication extends Application {
             Controller.buttonsPlaylist.add(button);
             buttonList.add(button);
         }
-        FXMLWriter fxmlWriter = new FXMLWriter();
-        fxmlWriter.writeCode(buttonList);
+        //FXMLWriter fxmlWriter = new FXMLWriter();
+        //fxmlWriter.writeCode(buttonList);
     }
 
     public static void main(String[] args) {

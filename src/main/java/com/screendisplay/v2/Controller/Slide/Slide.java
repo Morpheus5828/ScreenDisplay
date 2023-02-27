@@ -1,4 +1,4 @@
-package com.screendisplay.Controller.Slide;
+package com.screendisplay.v2.Controller.Slide;
 
 import java.io.File;
 import java.io.IOException;

@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.screendisplay.Controller.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.screendisplay.v2.Controller.Controller">
    <top>
       <Pane prefHeight="70.0" prefWidth="600.0" style="-fx-background-color: blue;" BorderPane.alignment="CENTER">
          <children>
