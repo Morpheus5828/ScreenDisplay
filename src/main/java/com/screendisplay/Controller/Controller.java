@@ -3,6 +3,7 @@ package com.screendisplay.Controller;
 import com.screendisplay.HelloApplication;
 import com.screendisplay.Model.FXMLWriter;
 import com.screendisplay.Model.JSONWriter;
+import com.screendisplay.Model.SaveFXMLUpdate;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -29,6 +30,9 @@ import java.util.*;
 
 public class Controller implements Initializable{
     public static List<Button> buttonsPlaylist = new ArrayList<>();
+    private SaveFXMLUpdate saveFXMLUpdate;
+    private String actualSlide;
+    private String actualRepository;
     /* Main page properties */
     @FXML private Button screen;
     @FXML private Button playlist;
@@ -36,6 +40,7 @@ public class Controller implements Initializable{
     @FXML private Button user;
     @FXML private StackPane contentArea;
     /* PlayList properties */
+    @FXML private Button saveSlideUpdate;
     @FXML private BorderPane playlistConfigBp;
     @FXML private Pane playlistPane;
     @FXML private Button createPlaylist;
@@ -188,6 +193,7 @@ public class Controller implements Initializable{
                     try {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         fxmlLoader.setLocation(new File(file).toURI().toURL());
+                        actualRepository = file;
                         Parent root = fxmlLoader.load();
                         playListListSp.getChildren().setAll(root);
                         playListListSp.getChildren().removeAll();
@@ -237,8 +243,14 @@ public class Controller implements Initializable{
                 textField.setLayoutY(mouseEvent.getSceneY() + dragDelta.y);
             }
         });
-
     }
+
+    public void saveModification() {
+        System.out.println(actualRepository);
+        saveFXMLUpdate = new SaveFXMLUpdate(actualRepository, "slide0.fxml");
+    }
+
+
 
 
 }
