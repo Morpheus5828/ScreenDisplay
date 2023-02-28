@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.screendisplay.v1.V1Controller.V1Controller">
+   <top>
+      <Pane prefHeight="85.0" prefWidth="600.0" style="-fx-background-color: blue;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="76.0" layoutY="24.0" text="ScreenDisplay V1">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+   <bottom>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </bottom>
+   <left>
+      <Pane prefHeight="275.0" prefWidth="165.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="left_btn" layoutX="139.0" layoutY="248.0" mnemonicParsing="false" onAction="#changeToSeeLeftSlide" text="&lt;" />
+            <Pane layoutX="14.0" layoutY="14.0" prefHeight="227.0" prefWidth="118.0" style="-fx-background-color: grey;">
+               <children>
+                  <Label layoutX="24.0" layoutY="22.0" text="Outils" underline="true" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Button layoutX="24.0" layoutY="56.0" mnemonicParsing="false" onAction="#addTextToSlide" text="TEXT" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </left>
+   <right>
+      <Pane prefHeight="275.0" prefWidth="70.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="right_btn" layoutX="2.0" layoutY="248.0" mnemonicParsing="false" onAction="#changeToSeeRightSlide" text="&gt;" />
+         </children>
+      </Pane>
+   </right>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane fx:id="v1Stackpane" layoutX="-1.0" layoutY="46.0" prefHeight="189.0" prefWidth="365.0" style="-fx-background-color: beige;">
+               <fx:include source="slide0.fxml" />
+            </StackPane>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
