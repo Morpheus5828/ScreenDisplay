@@ -1,7 +1,5 @@
 package com.screendisplay.v1;
 
-import com.screendisplay.v2.Controller.Slide.Slide;
-
 public enum SlideNb {
     SLIDE0, SLIDE1, SLIDE2;
 
