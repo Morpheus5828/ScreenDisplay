@@ -19,11 +19,14 @@ public class V1Controller {
     @FXML private StackPane v1Stackpane;
     @FXML private Button left_btn;
     @FXML private Button right_btn;
-    private Slide slide0 = new Slide("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\version 1.0\\picture\\bvn-vie-sco.png");
-    private Slide slide1 = new Slide("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\version 1.0\\picture\\acutalite-vie-sco.png");
-    private Slide slide2 = new Slide("C:\\Users\\thorr\\IdeaProjects\\ScreenDisplay\\src\\main\\resources\\com\\screendisplay\\version 1.0\\picture\\prof_abs.png");
+    private Slide slide0 = new Slide("/com/screendisplay/version1.0/picture/bvn-vie-sco.png");
+    private Slide slide1 = new Slide("/com/screendisplay/version1.0/picture/acutalite-vie-sco.png");
+    private Slide slide2 = new Slide("/com/screendisplay/version1.0/picture/prof_abs.png");
     private SlideNb currentSlideNB = SlideNb.SLIDE0;
     private Slide currentSlide = slide0;
+
+    public V1Controller() throws IOException {
+    }
 
     public void changeToSeeRightSlide(ActionEvent actionEvent) throws IOException {
         setCurrentSlideNB(currentSlideNB.nextSlide(currentSlideNB));
@@ -113,6 +116,6 @@ public class V1Controller {
         return null;
     }
 
-    /* Send element part to Receiver */
+    /*Send element part to Receiver */
 
 }
