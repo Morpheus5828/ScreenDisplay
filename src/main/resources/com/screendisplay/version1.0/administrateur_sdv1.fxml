@@ -17,6 +17,7 @@
                   <Font size="26.0" />
                </font>
             </Label>
+            <Button layoutX="493.0" layoutY="30.0" onAction="#sendFXMLToReceiver" text="Envoyer">Envoyer</Button>
          </children>
       </Pane>
    </top>

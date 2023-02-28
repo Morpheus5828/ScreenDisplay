@@ -20,7 +20,7 @@ public class Slide {
     private Image image;
     private String imageUrl;
 
-    private class TextFieldComponent {
+    private static class TextFieldComponent {
         private String name;
         private int layoutX;
         private int layoutY;

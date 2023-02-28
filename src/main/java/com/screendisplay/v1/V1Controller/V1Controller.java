@@ -1,5 +1,6 @@
 package com.screendisplay.v1.V1Controller;
 
+import com.screendisplay.v1.Sender;
 import com.screendisplay.v1.SlideNb;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,11 +15,14 @@ import javafx.scene.layout.StackPane;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class V1Controller {
     @FXML private StackPane v1Stackpane;
     @FXML private Button left_btn;
     @FXML private Button right_btn;
+    private Sender sender;
     private Slide slide0 = new Slide("/com/screendisplay/version1.0/picture/bvn-vie-sco.png");
     private Slide slide1 = new Slide("/com/screendisplay/version1.0/picture/acutalite-vie-sco.png");
     private Slide slide2 = new Slide("/com/screendisplay/version1.0/picture/prof_abs.png");
@@ -116,6 +120,17 @@ public class V1Controller {
         return null;
     }
 
+    public void sendFXMLToReceiver(ActionEvent actionEvent) throws IOException {
+        List<Slide> slides = new ArrayList<>();
+        slides.add(slide0);
+        slides.add(slide1);
+        slides.add(slide2);
+        sender = new Sender(slides);
+        sender.sendMessage();
+    }
+
     /*Send element part to Receiver */
+
+
 
 }
