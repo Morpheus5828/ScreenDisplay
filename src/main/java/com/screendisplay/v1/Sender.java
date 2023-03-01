@@ -2,9 +2,7 @@ package com.screendisplay.v1;
 
 import com.screendisplay.v1.V1Controller.Slide;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
@@ -19,15 +17,20 @@ public class Sender {
         this.slides = slides;
     }
 
-    public void sendMessage() throws IOException {
-        Socket socket = new Socket();
-        SocketAddress socketAddress = new InetSocketAddress(HOST, PORT);
-        socket.connect(socketAddress);
-        for(Slide slide : this.slides) {
-            PrintWriter out = new PrintWriter(
-                    new OutputStreamWriter(
-                            socket.getOutputStream()));
-            out.write(slide.toString());
+    public void sendMessage() {
+        System.out.println(slides.get(0));
+        try (Socket socket = new Socket(HOST, PORT);) {
+            OutputStream output = socket.getOutputStream();
+            PrintWriter writer = new PrintWriter(output, true);
+
+            for(Slide slide : this.slides) {
+                String s = slide.toString();
+                writer.println(s);
+            }
+
+
+        } catch (Exception e) {
+            System.err.println("ERROR - Connection Failed with Receiver");
         }
     }
 }
