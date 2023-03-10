@@ -10,25 +10,18 @@ import java.util.List;
 
 public class Sender {
     private final int PORT = 1234;
-    private final String HOST = "localhost";
-    private List<Slide> slides;
+    private final String HOST = "192.168.1.30";
 
-    public Sender(List<Slide> slides) {
-        this.slides = slides;
+    public Sender() {
+        //todo a envoyer le fichier
     }
 
     public void sendMessage() {
-        System.out.println(slides.get(0));
         try (Socket socket = new Socket(HOST, PORT);) {
             OutputStream output = socket.getOutputStream();
             PrintWriter writer = new PrintWriter(output, true);
-
-            for(Slide slide : this.slides) {
-                String s = slide.toString();
-                writer.println(s);
-            }
-
-
+            writer.println(",");
+            //writer.println();
         } catch (Exception e) {
             System.err.println("ERROR - Connection Failed with Receiver");
         }
